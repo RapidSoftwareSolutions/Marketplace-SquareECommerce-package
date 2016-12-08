@@ -1,5 +1,5 @@
 # SquareECommerce Package
-Square lets developers build an ecosystem for businesses to seamlessly accept payments online, in store, or on the go.
+Accept, process and filter online payments through Square.
 * Domain: squareup.com
 * Credentials: clientId, clientSecret
 

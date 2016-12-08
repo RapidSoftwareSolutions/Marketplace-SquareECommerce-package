@@ -1,1050 +1,952 @@
 {
-  "package": "SquareECommerce",
-  "tagline": "Square ECommerce API",
-  "description": "Square lets developers build an ecosystem for businesses to seamlessly accept payments online, in store, or on the go.",
-  "image": "http://logo.clearbit.com/squareup.com",
-  "repo": "https://github.com/RapidSoftwareSolutions/Marketplace-SquareECommerce-package",
-  "accounts": {
-    "domain": "squareup.com",
-    "credentials": [
-      "clientId",
-      "clientSecret"
-    ]
-  },
-  "blocks": [
-    {
-      "name": "getAccessToken",
-      "description": "This endpoint allows to obtain accessToken from SquareECommerce.",
-      "args": [
-        {
-          "name": "clientId",
-          "type": "credentials",
-          "info": "Required: API key obtained from Square ECommerce."
-        },
-        {
-          "name": "clientSecret",
-          "type": "credentials",
-          "info": "Required: API secret  obtained from Square ECommerce."
-        },
-        {
-          "name": "code",
-          "type": "String",
-          "info": "Required: Authorization code."
-        }
-      ],
-      "callbacks": [
-        {
-          "name": "error",
-          "info": "Error"
-        },
-        {
-          "name": "success",
-          "info": "Success"
-        }
-      ]
+    "package": "SquareECommerce",
+    "tagline": "Square ECommerce API",
+    "description": "Accept, process and filter online payments through Square.",
+    "image": "http:\/\/logo.clearbit.com\/squareup.com",
+    "repo": "https:\/\/github.com\/RapidSoftwareSolutions\/Marketplace-SquareECommerce-package",
+    "keywords": ["API", "bill", "billing", "bills", "charge", "commerce", "credit", "finance", "pay", "payment", "payments", "smb"],
+    "accounts": {
+        "domain": "squareup.com",
+        "credentials": ["clientId", "clientSecret"]
     },
-    {
-      "name": "refreshAccessToken",
-      "description": "This endpoint allows to renew acceesToken.",
-      "args": [
-        {
-          "name": "clientId",
-          "type": "credentials",
-          "info": "Required: API key obtained from Square ECommerce."
-        },
-        {
-          "name": "clientSecret",
-          "type": "credentials",
-          "info": "Required: API secret  obtained from Square ECommerce."
-        },
-        {
-          "name": "accessToken",
-          "type": "String",
-          "info": "Required: accessToken obtained from getAccessToken method."
-        }
-      ],
-      "callbacks": [
-        {
-          "name": "error",
-          "info": "Error"
-        },
-        {
-          "name": "success",
-          "info": "Success"
-        }
-      ]
-    },
-    {
-      "name": "revokeSingleAccessToken",
-      "description": "This endpoint allows to revoke an access token generated with the OAuth flow.",
-      "args": [
-        {
-          "name": "clientId",
-          "type": "credentials",
-          "info": "Required: API key obtained from Square ECommerce."
-        },
-        {
-          "name": "clientSecret",
-          "type": "credentials",
-          "info": "Required: API secret  obtained from Square ECommerce."
-        },
-        {
-          "name": "accessToken",
-          "type": "String",
-          "info": "Required: accessToken obtained from getAccessToken method."
-        }
-      ],
-      "callbacks": [
-        {
-          "name": "error",
-          "info": "Error"
-        },
-        {
-          "name": "success",
-          "info": "Success"
-        }
-      ]
-    },
-    {
-      "name": "revokeTokens",
-      "description": "This endpoint allows to revoke all merchant's access tokens.",
-      "args": [
-        {
-          "name": "clientId",
-          "type": "credentials",
-          "info": "Required: API key obtained from Square ECommerce."
-        },
-        {
-          "name": "clientSecret",
-          "type": "credentials",
-          "info": "Required: API secret  obtained from Square ECommerce."
-        },
-        {
-          "name": "merchantId",
-          "type": "String",
-          "info": "Required: The ID of the merchant whose token you want to revoke."
-        }
-      ],
-      "callbacks": [
-        {
-          "name": "error",
-          "info": "Error"
-        },
-        {
-          "name": "success",
-          "info": "Success"
-        }
-      ]
-    },
-    {
-      "name": "getLocations",
-      "description": "This endpoint provides the details for all of a business's locations.",
-      "args": [
-        {
-          "name": "accessToken",
-          "type": "String",
-          "info": "Required: Valid AccessToken."
-        }
-      ],
-      "callbacks": [
-        {
-          "name": "error",
-          "info": "Error"
-        },
-        {
-          "name": "success",
-          "info": "Success"
-        }
-      ]
-    },
-    {
-      "name": "chargeCard",
-      "description": "Charges a card represented by a card nonce or a customer's card on file.",
-      "args": [
-        {
-          "name": "accessToken",
-          "type": "String",
-          "info": "Required: Valid AccessToken."
-        },
-        {
-          "name": "locationId",
-          "type": "String",
-          "info": "Required: The ID of the location to associate the created transaction with."
-        },
-        {
-          "name": "idempotencyKey",
-          "type": "String",
-          "info": "Required: A value you specify that uniquely identifies this transaction among transactions you've created."
-        },
-        {
-          "name": "amount",
-          "type": "String",
-          "info": "Required: The amount of money to charge."
-        },
-        {
-          "name": "currency",
-          "type": "String",
-          "info": "Required: The type of currency, in ISO 4217 format. For example, the currency code for US dollars is USD. The value of currency must match the currency associated with the business that is charging the card."
-        },
-        {
-          "name": "cardNonce",
-          "type": "String",
-          "info": "Optional: A nonce generated from the SqPaymentForm that represents the card to charge. The application that provides a nonce to this endpoint must be the same application that generated the nonce with the SqPaymentForm. Otherwise, the nonce is invalid.Do not provide a value for this field if you provide a value for customer_card_id."
-        },
-        {
-          "name": "customerCardId",
-          "type": "String",
-          "info": "Optional: The ID of the customer card on file to charge. Do not provide a value for this field if you provide a value for card_nonce."
-        },
-        {
-          "name": "delayCapture",
-          "type": "String",
-          "info": "Optional: If true, the request will only perform an Auth on the provided card. Default value: false"
-        },
-        {
-          "name": "referenceId",
-          "type": "String",
-          "info": "Optional: An optional ID you can associate with the transaction for your own purposes (such as to associate the transaction with an entity ID in your own database). This value cannot exceed 40 characters."
-        },
-        {
-          "name": "note",
-          "type": "String",
-          "info": "Optional: An optional note to associate with the transaction. This value cannot exceed 60 characters."
-        },
-        {
-          "name": "customerId",
-          "type": "String",
-          "info": "Optional: The ID of the customer to associate this transaction with. This field is required if you provide a value for customer_card_id, and optional otherwise."
-        },
-        {
-          "name": "buyerEmailAddress",
-          "type": "String",
-          "info": "Optional: The buyer's email address, if available."
-        },
-        {
-          "name": "billingAddressLine1",
-          "type": "String",
-          "info": "Optional: The first line of the buyer's billing address."
-        },
-        {
-          "name": "billingAddressLine2",
-          "type": "String",
-          "info": "Optional: The second line of the buyer's billing address."
-        },
-        {
-          "name": "billingAddressLine3",
-          "type": "String",
-          "info": "Optional: The third line of the buyer's billing address."
-        },
-        {
-          "name": "billingLocality",
-          "type": "String",
-          "info": "Optional: The city or town of the buyer's billing address."
-        },
-        {
-          "name": "billingSublocality",
-          "type": "String",
-          "info": "Optional: A civil region within the address's locality of the buyer's billing address."
-        },
-        {
-          "name": "billingSublocality2",
-          "type": "String",
-          "info": "Optional: A civil region within the address's sublocality of the buyer's billing address."
-        },
-        {
-          "name": "billingSublocality3",
-          "type": "String",
-          "info": "Optional: A civil region within the address's sublocality2 of the buyer's billing address."
-        },
-        {
-          "name": "billingAdministrativeDistrictLevel1",
-          "type": "String",
-          "info": "Optional: A civil entity within the address's country of the buyer's billing address. In the US, this is the state."
-        },
-        {
-          "name": "billingAdministrativeDistrictLevel2",
-          "type": "String",
-          "info": "Optional: A civil entity within the address's administrative_district_level_1 of the buyer's billing address."
-        },
-        {
-          "name": "billingAdministrativeDistrictLevel3",
-          "type": "String",
-          "info": "Optional: A civil entity within the address's administrative_district_level_2 of the buyer's billing address."
-        },
-        {
-          "name": "billingPostalCode",
-          "type": "String",
-          "info": "Optional: The billing address's postal code."
-        },
-        {
-          "name": "billingCountry",
-          "type": "String",
-          "info": "Optional: The billing address's country, in ISO 3166-1-alpha-2 format."
-        },
-        {
-          "name": "shippingAddressLine1",
-          "type": "String",
-          "info": "Optional: The first line of the buyer's shipping address."
-        },
-        {
-          "name": "shippingAddressLine2",
-          "type": "String",
-          "info": "Optional: The second line of the buyer's shipping address."
-        },
-        {
-          "name": "shippingAddressLine3",
-          "type": "String",
-          "info": "Optional: The third line of the buyer's shipping address."
-        },
-        {
-          "name": "shippingLocality",
-          "type": "String",
-          "info": "Optional: The city or town of the buyer's shipping address."
-        },
-        {
-          "name": "shippingSublocality",
-          "type": "String",
-          "info": "Optional: A civil region within the address's locality of the buyer's shipping address."
-        },
-        {
-          "name": "shippingSublocality2",
-          "type": "String",
-          "info": "Optional: A civil region within the address's sublocality of the buyer's shipping address."
-        },
-        {
-          "name": "shippingSublocality3",
-          "type": "String",
-          "info": "Optional: A civil region within the address's sublocality2 of the buyer's shipping address."
-        },
-        {
-          "name": "shippingAdministrativeDistrictLevel1",
-          "type": "String",
-          "info": "Optional: A civil entity within the address's country of the buyer's shipping address. In the US, this is the state."
-        },
-        {
-          "name": "shippingAdministrativeDistrictLevel2",
-          "type": "String",
-          "info": "Optional: A civil entity within the address's administrative_district_level_1 of the buyer's shipping address."
-        },
-        {
-          "name": "shippingAdministrativeDistrictLevel3",
-          "type": "String",
-          "info": "Optional: A civil entity within the address's administrative_district_level_2 of the buyer's shipping address."
-        },
-        {
-          "name": "shippingPostalCode",
-          "type": "String",
-          "info": "Optional: The shipping address's postal code."
-        },
-        {
-          "name": "shippingCountry",
-          "type": "String",
-          "info": "Optional: The shipping address's country, in ISO 3166-1-alpha-2 format."
-        }
-      ],
-      "callbacks": [
-        {
-          "name": "error",
-          "info": "Error"
-        },
-        {
-          "name": "success",
-          "info": "Success"
-        }
-      ]
-    },
-    {
-      "name": "getTransactions",
-      "description": "This endpoint returns lists transactions for a particular location.",
-      "args": [
-        {
-          "name": "accessToken",
-          "type": "String",
-          "info": "Required: Valid AccessToken."
-        },
-        {
-          "name": "locationId",
-          "type": "String",
-          "info": "Required: The ID of the location to list transactions for."
-        },
-        {
-          "name": "beginTime",
-          "type": "String",
-          "info": "Optional: The beginning of the requested reporting period, in RFC 3339 format (2016-01-31T00:00:00Z). Default value: The current time minus one year."
-        },
-        {
-          "name": "endTime",
-          "type": "String",
-          "info": "Optional: The end of the requested reporting period, in RFC 3339 format (2016-01-31T00:00:00Z). Default value: The current time."
-        },
-        {
-          "name": "sortOrder",
-          "type": "String",
-          "info": "Optional: The order in which results are listed in the response (ASC for oldest first, DESC for newest first). Default value: DESC"
-        },
-        {
-          "name": "cursor",
-          "type": "String",
-          "info": "Optional: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for your original query."
-        }
-      ],
-      "callbacks": [
-        {
-          "name": "error",
-          "info": "Error"
-        },
-        {
-          "name": "success",
-          "info": "Success"
-        }
-      ]
-    },
-    {
-      "name": "captureSingleTransaction",
-      "description": "This endpoint allows to capture a transaction that was created with the Charge endpoint with a delay_capture value of true.",
-      "args": [
-        {
-          "name": "accessToken",
-          "type": "String",
-          "info": "Required: Valid AccessToken."
-        },
-        {
-          "name": "locationId",
-          "type": "String",
-          "info": "Required: The ID of the location to list transactions for."
-        },
-        {
-          "name": "transactionId",
-          "type": "String",
-          "info": "Required: The ID of the transaction."
-        }
-      ],
-      "callbacks": [
-        {
-          "name": "error",
-          "info": "Error"
-        },
-        {
-          "name": "success",
-          "info": "Success"
-        }
-      ]
-    },
-    {
-      "name": "voidSingleTransaction",
-      "description": "This endpoint allows to cancel a transaction that was created with the Charge endpoint with a delay_capture value of true.",
-      "args": [
-        {
-          "name": "accessToken",
-          "type": "String",
-          "info": "Required: Valid AccessToken."
-        },
-        {
-          "name": "locationId",
-          "type": "String",
-          "info": "Required: The ID of the location to list transactions for."
-        },
-        {
-          "name": "transactionId",
-          "type": "String",
-          "info": "Required: The ID of the transaction."
-        }
-      ],
-      "callbacks": [
-        {
-          "name": "error",
-          "info": "Error"
-        },
-        {
-          "name": "success",
-          "info": "Success"
-        }
-      ]
-    },
-    {
-      "name": "retrieveSingleTransaction",
-      "description": "This endpoint allows to retrieve details for a single transaction.",
-      "args": [
-        {
-          "name": "accessToken",
-          "type": "String",
-          "info": "Required: Valid AccessToken."
-        },
-        {
-          "name": "locationId",
-          "type": "String",
-          "info": "Required: The ID of the location to list transactions for."
-        },
-        {
-          "name": "transactionId",
-          "type": "String",
-          "info": "Required: The ID of the transaction."
-        }
-      ],
-      "callbacks": [
-        {
-          "name": "error",
-          "info": "Error"
-        },
-        {
-          "name": "success",
-          "info": "Success"
-        }
-      ]
-    },
-    {
-      "name": "createRefund",
-      "description": "This endpoint allows to create a refund",
-      "args": [
-        {
-          "name": "accessToken",
-          "type": "String",
-          "info": "Required: Valid AccessToken."
-        },
-        {
-          "name": "locationId",
-          "type": "String",
-          "info": "Required: The ID of the original transaction's associated location."
-        },
-        {
-          "name": "transactionId",
-          "type": "String",
-          "info": "Required: The ID of the original transaction that includes the tender to refund."
-        },
-        {
-          "name": "idempotencyKey",
-          "type": "String",
-          "info": "Required: A value you specify that uniquely identifies this refund among refunds you've created for the tender."
-        },
-        {
-          "name": "tenderId",
-          "type": "String",
-          "info": "Required: The ID of the tender to refund."
-        },
-        {
-          "name": "amount",
-          "type": "String",
-          "info": "Required: The amount of money, in the lowest in the smallest denomination of the currency indicated by currency. For example, when currency_code is USD, amount is in cents."
-        },
-        {
-          "name": "currency",
-          "type": "String",
-          "info": "Required: The type of currency, in ISO 4217 format. For example, the currency code for US dollars is USD."
-        },
-        {
-          "name": "reason",
-          "type": "String",
-          "info": "Optional: A description of the reason for the refund. Default value: Refund via API"
-        }
-      ],
-      "callbacks": [
-        {
-          "name": "error",
-          "info": "Error"
-        },
-        {
-          "name": "success",
-          "info": "Success"
-        }
-      ]
-    },
-    {
-      "name": "getRefunds",
-      "description": "This endpoint returns lists refunds for one of a business's locations.",
-      "args": [
-        {
-          "name": "accessToken",
-          "type": "String",
-          "info": "Required: Valid AccessToken."
-        },
-        {
-          "name": "locationId",
-          "type": "String",
-          "info": "Required: The ID of the location to list refunds for."
-        },
-        {
-          "name": "beginTime",
-          "type": "String",
-          "info": "Optional: The beginning of the requested reporting period, in RFC 3339 format (2016-01-31T00:00:00Z). Default value: The current time minus one year."
-        },
-        {
-          "name": "endTime",
-          "type": "String",
-          "info": "Optional: The end of the requested reporting period, in RFC 3339 format (2016-01-31T00:00:00Z). Default value: The current time."
-        },
-        {
-          "name": "sortOrder",
-          "type": "String",
-          "info": "Optional: The order in which results are listed in the response (ASC for oldest first, DESC for newest first). Default value: DESC"
-        },
-        {
-          "name": "cursor",
-          "type": "String",
-          "info": "Optional: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for your original query."
-        }
-      ],
-      "callbacks": [
-        {
-          "name": "error",
-          "info": "Error"
-        },
-        {
-          "name": "success",
-          "info": "Success"
-        }
-      ]
-    },
-    {
-      "name": "createCustomer",
-      "description": "This endpoint creates a new customer for a business, which can have associated cards on file.",
-      "args": [
-        {
-          "name": "accessToken",
-          "type": "String",
-          "info": "Required: Valid AccessToken."
-        },
-        {
-          "name": "givenName",
-          "type": "String",
-          "info": "Optional: The customer's given (i.e., first) name."
-        },
-        {
-          "name": "familyName",
-          "type": "String",
-          "info": "Optional: The customer's family (i.e., last) name."
-        },
-        {
-          "name": "companyName",
-          "type": "String",
-          "info": "Optional: The name of the customer's company."
-        },
-        {
-          "name": "nickname",
-          "type": "String",
-          "info": "Optional: A nickname for the customer."
-        },
-        {
-          "name": "email",
-          "type": "String",
-          "info": "Optional: The customer's email address."
-        },
-        {
-          "name": "phoneNumber",
-          "type": "String",
-          "info": "Optional: The customer's phone number."
-        },
-        {
-          "name": "referenceId",
-          "type": "String",
-          "info": "Optional: An optional second ID you can set to associate the customer with an entity in another system."
-        },
-        {
-          "name": "note",
-          "type": "String",
-          "info": "Optional: An optional note to associate with the customer."
-        },
-        {
-          "name": "addressLine1",
-          "type": "String",
-          "info": "Optional: The first line of the address."
-        },
-        {
-          "name": "addressLine2",
-          "type": "String",
-          "info": "Optional: The second line of the address, if any."
-        },
-        {
-          "name": "addressLine3",
-          "type": "String",
-          "info": "Optional: The third line of the address, if any."
-        },
-        {
-          "name": "addressLocality",
-          "type": "String",
-          "info": "Optional: The city or town of the address."
-        },
-        {
-          "name": "addressSublocality",
-          "type": "String",
-          "info": "Optional: A civil region within the address's locality, if any."
-        },
-        {
-          "name": "addressSublocality2",
-          "type": "String",
-          "info": "Optional: A civil region within the address's sublocality, if any."
-        },
-        {
-          "name": "addressSublocality3",
-          "type": "String",
-          "info": "Optional: A civil region within the address's sublocality2, if any."
-        },
-        {
-          "name": "addressAdministrativeDistrictLevel1",
-          "type": "String",
-          "info": "Optional: A civil entity within the address's country. In the US, this is the state."
-        },
-        {
-          "name": "addressAdministrativeDistrictLevel2",
-          "type": "String",
-          "info": "Optional: A civil entity within the address's administrative_district_level_1. In the US, this is the county."
-        },
-        {
-          "name": "addressAdministrativeDistrictLevel3",
-          "type": "String",
-          "info": "Optional: A civil entity within the address's administrative_district_level_2, if any."
-        },
-        {
-          "name": "addressPostalCode",
-          "type": "String",
-          "info": "Optional: The address's postal code."
-        },
-        {
-          "name": "addressCountry",
-          "type": "String",
-          "info": "Optional: The address's country, in ISO 3166-1-alpha-2 format."
-        }
-      ],
-      "callbacks": [
-        {
-          "name": "error",
-          "info": "Error"
-        },
-        {
-          "name": "success",
-          "info": "Success"
-        }
-      ]
-    },
-    {
-      "name": "getCustomers",
-      "description": "This endpoint returns lists a business's customers.",
-      "args": [
-        {
-          "name": "accessToken",
-          "type": "String",
-          "info": "Required: Valid AccessToken."
-        },
-        {
-          "name": "cursor",
-          "type": "String",
-          "info": "Optional: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for your original query."
-        }
-      ],
-      "callbacks": [
-        {
-          "name": "error",
-          "info": "Error"
-        },
-        {
-          "name": "success",
-          "info": "Success"
-        }
-      ]
-    },
-    {
-      "name": "updateCustomer",
-      "description": "This endpoint updates the details of an existing customer.",
-      "args": [
-        {
-          "name": "accessToken",
-          "type": "String",
-          "info": "Required: Valid AccessToken."
-        },
-        {
-          "name": "customerId",
-          "type": "String",
-          "info": "Required: The ID of the customer to update."
-        },
-        {
-          "name": "givenName",
-          "type": "String",
-          "info": "Optional: The customer's given (i.e., first) name."
-        },
-        {
-          "name": "familyName",
-          "type": "String",
-          "info": "Optional: The customer's family (i.e., last) name."
-        },
-        {
-          "name": "companyName",
-          "type": "String",
-          "info": "Optional: The name of the customer's company."
-        },
-        {
-          "name": "nickname",
-          "type": "String",
-          "info": "Optional: A nickname for the customer."
-        },
-        {
-          "name": "email",
-          "type": "String",
-          "info": "Optional: The customer's email address."
-        },
-        {
-          "name": "phoneNumber",
-          "type": "String",
-          "info": "Optional: The customer's phone number."
-        },
-        {
-          "name": "referenceId",
-          "type": "String",
-          "info": "Optional: An optional second ID you can set to associate the customer with an entity in another system."
-        },
-        {
-          "name": "note",
-          "type": "String",
-          "info": "Optional: An optional note to associate with the customer."
-        },
-        {
-          "name": "addressLine1",
-          "type": "String",
-          "info": "Optional: The first line of the address."
-        },
-        {
-          "name": "addressLine2",
-          "type": "String",
-          "info": "Optional: The second line of the address, if any."
-        },
-        {
-          "name": "addressLine3",
-          "type": "String",
-          "info": "Optional: The third line of the address, if any."
-        },
-        {
-          "name": "addressLocality",
-          "type": "String",
-          "info": "Optional: The city or town of the address."
-        },
-        {
-          "name": "addressSublocality",
-          "type": "String",
-          "info": "Optional: A civil region within the address's locality, if any."
-        },
-        {
-          "name": "addressSublocality2",
-          "type": "String",
-          "info": "Optional: A civil region within the address's sublocality, if any."
-        },
-        {
-          "name": "addressSublocality3",
-          "type": "String",
-          "info": "Optional: A civil region within the address's sublocality2, if any."
-        },
-        {
-          "name": "addressAdministrativeDistrictLevel1",
-          "type": "String",
-          "info": "Optional: A civil entity within the address's country. In the US, this is the state."
-        },
-        {
-          "name": "addressAdministrativeDistrictLevel2",
-          "type": "String",
-          "info": "Optional: A civil entity within the address's administrative_district_level_1. In the US, this is the county."
-        },
-        {
-          "name": "addressAdministrativeDistrictLevel3",
-          "type": "String",
-          "info": "Optional: A civil entity within the address's administrative_district_level_2, if any."
-        },
-        {
-          "name": "addressPostalCode",
-          "type": "String",
-          "info": "Optional: The address's postal code."
-        },
-        {
-          "name": "addressCountry",
-          "type": "String",
-          "info": "Optional: The address's country, in ISO 3166-1-alpha-2 format."
-        }
-      ],
-      "callbacks": [
-        {
-          "name": "error",
-          "info": "Error"
-        },
-        {
-          "name": "success",
-          "info": "Success"
-        }
-      ]
-    },
-    {
-      "name": "getSingleCustomer",
-      "description": "This endpoint returns details for a single customer.",
-      "args": [
-        {
-          "name": "accessToken",
-          "type": "String",
-          "info": "Required: Valid AccessToken."
-        },
-        {
-          "name": "customerId",
-          "type": "String",
-          "info": "Required: The ID of the customer to retrieve."
-        }
-      ],
-      "callbacks": [
-        {
-          "name": "error",
-          "info": "Error"
-        },
-        {
-          "name": "success",
-          "info": "Success"
-        }
-      ]
-    },
-    {
-      "name": "createCustomerCard",
-      "description": "Adds a card on file to an existing customer.",
-      "args": [
-        {
-          "name": "accessToken",
-          "type": "String",
-          "info": "Required: Valid AccessToken."
-        },
-        {
-          "name": "customerId",
-          "type": "String",
-          "info": "Required: The ID of the customer to link the card on file to."
-        },
-        {
-          "name": "cardNonce",
-          "type": "String",
-          "info": "Required: A card nonce representing the credit card to link to the customer."
-        },
-        {
-          "name": "cardholderName",
-          "type": "String",
-          "info": "Optional: The cardholder's name."
-        },
-        {
-          "name": "billingAddressLine1",
-          "type": "String",
-          "info": "Optional: The first line of the buyer's billing address."
-        },
-        {
-          "name": "billingAddressLine2",
-          "type": "String",
-          "info": "Optional: The second line of the buyer's billing address."
-        },
-        {
-          "name": "billingAddressLine3",
-          "type": "String",
-          "info": "Optional: The third line of the buyer's billing address."
-        },
-        {
-          "name": "billingLocality",
-          "type": "String",
-          "info": "Optional: The city or town of the buyer's billing address."
-        },
-        {
-          "name": "billingSublocality",
-          "type": "String",
-          "info": "Optional: A civil region within the address's locality of the buyer's billing address."
-        },
-        {
-          "name": "billingSublocality2",
-          "type": "String",
-          "info": "Optional: A civil region within the address's sublocality of the buyer's billing address."
-        },
-        {
-          "name": "billingSublocality3",
-          "type": "String",
-          "info": "Optional: A civil region within the address's sublocality2 of the buyer's billing address."
-        },
-        {
-          "name": "billingAdministrativeDistrictLevel1",
-          "type": "String",
-          "info": "Optional: A civil entity within the address's country of the buyer's billing address. In the US, this is the state."
-        },
-        {
-          "name": "billingAdministrativeDistrictLevel2",
-          "type": "String",
-          "info": "Optional: A civil entity within the address's administrative_district_level_1 of the buyer's billing address."
-        },
-        {
-          "name": "billingAdministrativeDistrictLevel3",
-          "type": "String",
-          "info": "Optional: A civil entity within the address's administrative_district_level_2 of the buyer's billing address."
-        },
-        {
-          "name": "billingPostalCode",
-          "type": "String",
-          "info": "Optional: The billing address's postal code."
-        },
-        {
-          "name": "billingCountry",
-          "type": "String",
-          "info": "Optional: The billing address's country, in ISO 3166-1-alpha-2 format."
-        }
-      ],
-      "callbacks": [
-        {
-          "name": "error",
-          "info": "Error"
-        },
-        {
-          "name": "success",
-          "info": "Success"
-        }
-      ]
-    },
-    {
-      "name": "deleteCustomerCard",
-      "description": "This endpoint removes a card on file from a customer.",
-      "args": [
-        {
-          "name": "accessToken",
-          "type": "String",
-          "info": "Required: Valid AccessToken."
-        },
-        {
-          "name": "customerId",
-          "type": "String",
-          "info": "Required: The ID of the customer to delete."
-        },
-        {
-          "name": "cardId",
-          "type": "String",
-          "info": "Required: The ID of the card on file to delete."
-        }
-      ],
-      "callbacks": [
-        {
-          "name": "error",
-          "info": "Error"
-        },
-        {
-          "name": "success",
-          "info": "Success"
-        }
-      ]
-    },
-    {
-      "name": "deleteSingleCustomer",
-      "description": "This endpoint deletes a customer from a business, along with any linked cards on file.",
-      "args": [
-        {
-          "name": "accessToken",
-          "type": "String",
-          "info": "Required: Valid AccessToken."
-        },
-        {
-          "name": "customerId",
-          "type": "String",
-          "info": "Required: The ID of the customer to delete."
-        }
-      ],
-      "callbacks": [
-        {
-          "name": "error",
-          "info": "Error"
-        },
-        {
-          "name": "success",
-          "info": "Success"
-        }
-      ]
-    }
-  ]
+    "blocks": [{
+            "name": "getAccessToken",
+            "description": "This endpoint allows to obtain accessToken from SquareECommerce.",
+            "args": [{
+                    "name": "clientId",
+                    "type": "credentials",
+                    "info": "API key obtained from Square ECommerce.",
+                    "required": true
+                }, {
+                    "name": "clientSecret",
+                    "type": "credentials",
+                    "info": "API secret obtained from Square ECommerce.",
+                    "required": true
+                }, {
+                    "name": "code",
+                    "type": "String",
+                    "info": "Authorization code.",
+                    "required": true
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "Error"
+                }, {
+                    "name": "success",
+                    "info": "Success"
+                }]
+        }, {
+            "name": "refreshAccessToken",
+            "description": "This endpoint allows to renew acceesToken.",
+            "args": [{
+                    "name": "clientId",
+                    "type": "credentials",
+                    "info": "API key obtained from Square ECommerce.",
+                    "required": true
+                }, {
+                    "name": "clientSecret",
+                    "type": "credentials",
+                    "info": "API secret obtained from Square ECommerce.",
+                    "required": true
+                }, {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "accessToken obtained from getAccessToken method.",
+                    "required": true
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "Error"
+                }, {
+                    "name": "success",
+                    "info": "Success"
+                }]
+        }, {
+            "name": "revokeSingleAccessToken",
+            "description": "This endpoint allows to revoke an access token generated with the OAuth flow.",
+            "args": [{
+                    "name": "clientId",
+                    "type": "credentials",
+                    "info": "API key obtained from Square ECommerce.",
+                    "required": true
+                }, {
+                    "name": "clientSecret",
+                    "type": "credentials",
+                    "info": "API secret obtained from Square ECommerce.",
+                    "required": true
+                }, {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "accessToken obtained from getAccessToken method.",
+                    "required": true
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "Error"
+                }, {
+                    "name": "success",
+                    "info": "Success"
+                }]
+        }, {
+            "name": "revokeTokens",
+            "description": "This endpoint allows to revoke all merchant's access tokens.",
+            "args": [{
+                    "name": "clientId",
+                    "type": "credentials",
+                    "info": "API key obtained from Square ECommerce.",
+                    "required": true
+                }, {
+                    "name": "clientSecret",
+                    "type": "credentials",
+                    "info": "API secret obtained from Square ECommerce.",
+                    "required": true
+                }, {
+                    "name": "merchantId",
+                    "type": "String",
+                    "info": "The ID of the merchant whose token you want to revoke.",
+                    "required": true
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "Error"
+                }, {
+                    "name": "success",
+                    "info": "Success"
+                }]
+        }, {
+            "name": "getLocations",
+            "description": "This endpoint provides the details for all of a business's locations.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Valid AccessToken.",
+                    "required": true
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "Error"
+                }, {
+                    "name": "success",
+                    "info": "Success"
+                }]
+        }, {
+            "name": "chargeCard",
+            "description": "Charges a card represented by a card nonce or a customer's card on file.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Valid AccessToken.",
+                    "required": true
+                }, {
+                    "name": "locationId",
+                    "type": "String",
+                    "info": "The ID of the location to associate the created transaction with.",
+                    "required": true
+                }, {
+                    "name": "idempotencyKey",
+                    "type": "String",
+                    "info": "A value you specify that uniquely identifies this transaction among transactions you've created.",
+                    "required": true
+                }, {
+                    "name": "amount",
+                    "type": "String",
+                    "info": "The amount of money to charge.",
+                    "required": true
+                }, {
+                    "name": "currency",
+                    "type": "String",
+                    "info": "The type of currency, in ISO 4217 format. For example, the currency code for US dollars is USD. The value of currency must match the currency associated with the business that is charging the card.",
+                    "required": true
+                }, {
+                    "name": "cardNonce",
+                    "type": "String",
+                    "info": "A nonce generated from the SqPaymentForm that represents the card to charge. The application that provides a nonce to this endpoint must be the same application that generated the nonce with the SqPaymentForm. Otherwise, the nonce is invalid.Do not provide a value for this field if you provide a value for customer_card_id.",
+                    "required": false
+                }, {
+                    "name": "customerCardId",
+                    "type": "String",
+                    "info": "The ID of the customer card on file to charge. Do not provide a value for this field if you provide a value for card_nonce.",
+                    "required": false
+                }, {
+                    "name": "delayCapture",
+                    "type": "String",
+                    "info": "If true, the request will only perform an Auth on the provided card. Default value: false",
+                    "required": false
+                }, {
+                    "name": "referenceId",
+                    "type": "String",
+                    "info": "An optional ID you can associate with the transaction for your own purposes (such as to associate the transaction with an entity ID in your own database). This value cannot exceed 40 characters.",
+                    "required": false
+                }, {
+                    "name": "note",
+                    "type": "String",
+                    "info": "An optional note to associate with the transaction. This value cannot exceed 60 characters.",
+                    "required": false
+                }, {
+                    "name": "customerId",
+                    "type": "String",
+                    "info": "The ID of the customer to associate this transaction with. This field is required if you provide a value for customer_card_id, and optional otherwise.",
+                    "required": false
+                }, {
+                    "name": "buyerEmailAddress",
+                    "type": "String",
+                    "info": "The buyer's email address, if available.",
+                    "required": false
+                }, {
+                    "name": "billingAddressLine1",
+                    "type": "String",
+                    "info": "The first line of the buyer's billing address.",
+                    "required": false
+                }, {
+                    "name": "billingAddressLine2",
+                    "type": "String",
+                    "info": "The second line of the buyer's billing address.",
+                    "required": false
+                }, {
+                    "name": "billingAddressLine3",
+                    "type": "String",
+                    "info": "The third line of the buyer's billing address.",
+                    "required": false
+                }, {
+                    "name": "billingLocality",
+                    "type": "String",
+                    "info": "The city or town of the buyer's billing address.",
+                    "required": false
+                }, {
+                    "name": "billingSublocality",
+                    "type": "String",
+                    "info": "A civil region within the address's locality of the buyer's billing address.",
+                    "required": false
+                }, {
+                    "name": "billingSublocality2",
+                    "type": "String",
+                    "info": "A civil region within the address's sublocality of the buyer's billing address.",
+                    "required": false
+                }, {
+                    "name": "billingSublocality3",
+                    "type": "String",
+                    "info": "A civil region within the address's sublocality2 of the buyer's billing address.",
+                    "required": false
+                }, {
+                    "name": "billingAdministrativeDistrictLevel1",
+                    "type": "String",
+                    "info": "A civil entity within the address's country of the buyer's billing address. In the US, this is the state.",
+                    "required": false
+                }, {
+                    "name": "billingAdministrativeDistrictLevel2",
+                    "type": "String",
+                    "info": "A civil entity within the address's administrative_district_level_1 of the buyer's billing address.",
+                    "required": false
+                }, {
+                    "name": "billingAdministrativeDistrictLevel3",
+                    "type": "String",
+                    "info": "A civil entity within the address's administrative_district_level_2 of the buyer's billing address.",
+                    "required": false
+                }, {
+                    "name": "billingPostalCode",
+                    "type": "String",
+                    "info": "The billing address's postal code.",
+                    "required": false
+                }, {
+                    "name": "billingCountry",
+                    "type": "String",
+                    "info": "The billing address's country, in ISO 3166-1-alpha-2 format.",
+                    "required": false
+                }, {
+                    "name": "shippingAddressLine1",
+                    "type": "String",
+                    "info": "The first line of the buyer's shipping address.",
+                    "required": false
+                }, {
+                    "name": "shippingAddressLine2",
+                    "type": "String",
+                    "info": "The second line of the buyer's shipping address.",
+                    "required": false
+                }, {
+                    "name": "shippingAddressLine3",
+                    "type": "String",
+                    "info": "The third line of the buyer's shipping address.",
+                    "required": false
+                }, {
+                    "name": "shippingLocality",
+                    "type": "String",
+                    "info": "The city or town of the buyer's shipping address.",
+                    "required": false
+                }, {
+                    "name": "shippingSublocality",
+                    "type": "String",
+                    "info": "A civil region within the address's locality of the buyer's shipping address.",
+                    "required": false
+                }, {
+                    "name": "shippingSublocality2",
+                    "type": "String",
+                    "info": "A civil region within the address's sublocality of the buyer's shipping address.",
+                    "required": false
+                }, {
+                    "name": "shippingSublocality3",
+                    "type": "String",
+                    "info": "A civil region within the address's sublocality2 of the buyer's shipping address.",
+                    "required": false
+                }, {
+                    "name": "shippingAdministrativeDistrictLevel1",
+                    "type": "String",
+                    "info": "A civil entity within the address's country of the buyer's shipping address. In the US, this is the state.",
+                    "required": false
+                }, {
+                    "name": "shippingAdministrativeDistrictLevel2",
+                    "type": "String",
+                    "info": "A civil entity within the address's administrative_district_level_1 of the buyer's shipping address.",
+                    "required": false
+                }, {
+                    "name": "shippingAdministrativeDistrictLevel3",
+                    "type": "String",
+                    "info": "A civil entity within the address's administrative_district_level_2 of the buyer's shipping address.",
+                    "required": false
+                }, {
+                    "name": "shippingPostalCode",
+                    "type": "String",
+                    "info": "The shipping address's postal code.",
+                    "required": false
+                }, {
+                    "name": "shippingCountry",
+                    "type": "String",
+                    "info": "The shipping address's country, in ISO 3166-1-alpha-2 format.",
+                    "required": false
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "Error"
+                }, {
+                    "name": "success",
+                    "info": "Success"
+                }]
+        }, {
+            "name": "getTransactions",
+            "description": "This endpoint returns lists transactions for a particular location.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Valid AccessToken.",
+                    "required": true
+                }, {
+                    "name": "locationId",
+                    "type": "String",
+                    "info": "The ID of the location to list transactions for.",
+                    "required": true
+                }, {
+                    "name": "beginTime",
+                    "type": "String",
+                    "info": "The beginning of the requested reporting period, in RFC 3339 format (2016-01-31T00:00:00Z). Default value: The current time minus one year.",
+                    "required": false
+                }, {
+                    "name": "endTime",
+                    "type": "String",
+                    "info": "The end of the requested reporting period, in RFC 3339 format (2016-01-31T00:00:00Z). Default value: The current time.",
+                    "required": false
+                }, {
+                    "name": "sortOrder",
+                    "type": "String",
+                    "info": "The order in which results are listed in the response (ASC for oldest first, DESC for newest first). Default value: DESC",
+                    "required": false
+                }, {
+                    "name": "cursor",
+                    "type": "String",
+                    "info": "A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for your original query.",
+                    "required": false
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "Error"
+                }, {
+                    "name": "success",
+                    "info": "Success"
+                }]
+        }, {
+            "name": "captureSingleTransaction",
+            "description": "This endpoint allows to capture a transaction that was created with the Charge endpoint with a delay_capture value of true.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Valid AccessToken.",
+                    "required": true
+                }, {
+                    "name": "locationId",
+                    "type": "String",
+                    "info": "The ID of the location to list transactions for.",
+                    "required": true
+                }, {
+                    "name": "transactionId",
+                    "type": "String",
+                    "info": "The ID of the transaction.",
+                    "required": true
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "Error"
+                }, {
+                    "name": "success",
+                    "info": "Success"
+                }]
+        }, {
+            "name": "voidSingleTransaction",
+            "description": "This endpoint allows to cancel a transaction that was created with the Charge endpoint with a delay_capture value of true.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Valid AccessToken.",
+                    "required": true
+                }, {
+                    "name": "locationId",
+                    "type": "String",
+                    "info": "The ID of the location to list transactions for.",
+                    "required": true
+                }, {
+                    "name": "transactionId",
+                    "type": "String",
+                    "info": "The ID of the transaction.",
+                    "required": true
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "Error"
+                }, {
+                    "name": "success",
+                    "info": "Success"
+                }]
+        }, {
+            "name": "retrieveSingleTransaction",
+            "description": "This endpoint allows to retrieve details for a single transaction.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Valid AccessToken.",
+                    "required": true
+                }, {
+                    "name": "locationId",
+                    "type": "String",
+                    "info": "The ID of the location to list transactions for.",
+                    "required": true
+                }, {
+                    "name": "transactionId",
+                    "type": "String",
+                    "info": "The ID of the transaction.",
+                    "required": true
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "Error"
+                }, {
+                    "name": "success",
+                    "info": "Success"
+                }]
+        }, {
+            "name": "createRefund",
+            "description": "This endpoint allows to create a refund",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Valid AccessToken.",
+                    "required": true
+                }, {
+                    "name": "locationId",
+                    "type": "String",
+                    "info": "The ID of the original transaction's associated location.",
+                    "required": true
+                }, {
+                    "name": "transactionId",
+                    "type": "String",
+                    "info": "The ID of the original transaction that includes the tender to refund.",
+                    "required": true
+                }, {
+                    "name": "idempotencyKey",
+                    "type": "String",
+                    "info": "A value you specify that uniquely identifies this refund among refunds you've created for the tender.",
+                    "required": true
+                }, {
+                    "name": "tenderId",
+                    "type": "String",
+                    "info": "The ID of the tender to refund.",
+                    "required": true
+                }, {
+                    "name": "amount",
+                    "type": "String",
+                    "info": "The amount of money, in the lowest in the smallest denomination of the currency indicated by currency. For example, when currency_code is USD, amount is in cents.",
+                    "required": true
+                }, {
+                    "name": "currency",
+                    "type": "String",
+                    "info": "The type of currency, in ISO 4217 format. For example, the currency code for US dollars is USD.",
+                    "required": true
+                }, {
+                    "name": "reason",
+                    "type": "String",
+                    "info": "A description of the reason for the refund. Default value: Refund via API",
+                    "required": false
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "Error"
+                }, {
+                    "name": "success",
+                    "info": "Success"
+                }]
+        }, {
+            "name": "getRefunds",
+            "description": "This endpoint returns lists refunds for one of a business's locations.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Valid AccessToken.",
+                    "required": true
+                }, {
+                    "name": "locationId",
+                    "type": "String",
+                    "info": "The ID of the location to list refunds for.",
+                    "required": true
+                }, {
+                    "name": "beginTime",
+                    "type": "String",
+                    "info": "The beginning of the requested reporting period, in RFC 3339 format (2016-01-31T00:00:00Z). Default value: The current time minus one year.",
+                    "required": false
+                }, {
+                    "name": "endTime",
+                    "type": "String",
+                    "info": "The end of the requested reporting period, in RFC 3339 format (2016-01-31T00:00:00Z). Default value: The current time.",
+                    "required": false
+                }, {
+                    "name": "sortOrder",
+                    "type": "String",
+                    "info": "The order in which results are listed in the response (ASC for oldest first, DESC for newest first). Default value: DESC",
+                    "required": false
+                }, {
+                    "name": "cursor",
+                    "type": "String",
+                    "info": "A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for your original query.",
+                    "required": false
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "Error"
+                }, {
+                    "name": "success",
+                    "info": "Success"
+                }]
+        }, {
+            "name": "createCustomer",
+            "description": "This endpoint creates a new customer for a business, which can have associated cards on file.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Valid AccessToken.",
+                    "required": true
+                }, {
+                    "name": "givenName",
+                    "type": "String",
+                    "info": "The customer's given (i.e., first) name.",
+                    "required": false
+                }, {
+                    "name": "familyName",
+                    "type": "String",
+                    "info": "The customer's family (i.e., last) name.",
+                    "required": false
+                }, {
+                    "name": "companyName",
+                    "type": "String",
+                    "info": "The name of the customer's company.",
+                    "required": false
+                }, {
+                    "name": "nickname",
+                    "type": "String",
+                    "info": "A nickname for the customer.",
+                    "required": false
+                }, {
+                    "name": "email",
+                    "type": "String",
+                    "info": "The customer's email address.",
+                    "required": false
+                }, {
+                    "name": "phoneNumber",
+                    "type": "String",
+                    "info": "The customer's phone number.",
+                    "required": false
+                }, {
+                    "name": "referenceId",
+                    "type": "String",
+                    "info": "An optional second ID you can set to associate the customer with an entity in another system.",
+                    "required": false
+                }, {
+                    "name": "note",
+                    "type": "String",
+                    "info": "An optional note to associate with the customer.",
+                    "required": false
+                }, {
+                    "name": "addressLine1",
+                    "type": "String",
+                    "info": "The first line of the address.",
+                    "required": false
+                }, {
+                    "name": "addressLine2",
+                    "type": "String",
+                    "info": "The second line of the address, if any.",
+                    "required": false
+                }, {
+                    "name": "addressLine3",
+                    "type": "String",
+                    "info": "The third line of the address, if any.",
+                    "required": false
+                }, {
+                    "name": "addressLocality",
+                    "type": "String",
+                    "info": "The city or town of the address.",
+                    "required": false
+                }, {
+                    "name": "addressSublocality",
+                    "type": "String",
+                    "info": "A civil region within the address's locality, if any.",
+                    "required": false
+                }, {
+                    "name": "addressSublocality2",
+                    "type": "String",
+                    "info": "A civil region within the address's sublocality, if any.",
+                    "required": false
+                }, {
+                    "name": "addressSublocality3",
+                    "type": "String",
+                    "info": "A civil region within the address's sublocality2, if any.",
+                    "required": false
+                }, {
+                    "name": "addressAdministrativeDistrictLevel1",
+                    "type": "String",
+                    "info": "A civil entity within the address's country. In the US, this is the state.",
+                    "required": false
+                }, {
+                    "name": "addressAdministrativeDistrictLevel2",
+                    "type": "String",
+                    "info": "A civil entity within the address's administrative_district_level_1. In the US, this is the county.",
+                    "required": false
+                }, {
+                    "name": "addressAdministrativeDistrictLevel3",
+                    "type": "String",
+                    "info": "A civil entity within the address's administrative_district_level_2, if any.",
+                    "required": false
+                }, {
+                    "name": "addressPostalCode",
+                    "type": "String",
+                    "info": "The address's postal code.",
+                    "required": false
+                }, {
+                    "name": "addressCountry",
+                    "type": "String",
+                    "info": "The address's country, in ISO 3166-1-alpha-2 format.",
+                    "required": false
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "Error"
+                }, {
+                    "name": "success",
+                    "info": "Success"
+                }]
+        }, {
+            "name": "getCustomers",
+            "description": "This endpoint returns lists a business's customers.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Valid AccessToken.",
+                    "required": true
+                }, {
+                    "name": "cursor",
+                    "type": "String",
+                    "info": "A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for your original query.",
+                    "required": false
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "Error"
+                }, {
+                    "name": "success",
+                    "info": "Success"
+                }]
+        }, {
+            "name": "updateCustomer",
+            "description": "This endpoint updates the details of an existing customer.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Valid AccessToken.",
+                    "required": true
+                }, {
+                    "name": "customerId",
+                    "type": "String",
+                    "info": "The ID of the customer to update.",
+                    "required": true
+                }, {
+                    "name": "givenName",
+                    "type": "String",
+                    "info": "The customer's given (i.e., first) name.",
+                    "required": false
+                }, {
+                    "name": "familyName",
+                    "type": "String",
+                    "info": "The customer's family (i.e., last) name.",
+                    "required": false
+                }, {
+                    "name": "companyName",
+                    "type": "String",
+                    "info": "The name of the customer's company.",
+                    "required": false
+                }, {
+                    "name": "nickname",
+                    "type": "String",
+                    "info": "A nickname for the customer.",
+                    "required": false
+                }, {
+                    "name": "email",
+                    "type": "String",
+                    "info": "The customer's email address.",
+                    "required": false
+                }, {
+                    "name": "phoneNumber",
+                    "type": "String",
+                    "info": "The customer's phone number.",
+                    "required": false
+                }, {
+                    "name": "referenceId",
+                    "type": "String",
+                    "info": "An optional second ID you can set to associate the customer with an entity in another system.",
+                    "required": false
+                }, {
+                    "name": "note",
+                    "type": "String",
+                    "info": "An optional note to associate with the customer.",
+                    "required": false
+                }, {
+                    "name": "addressLine1",
+                    "type": "String",
+                    "info": "The first line of the address.",
+                    "required": false
+                }, {
+                    "name": "addressLine2",
+                    "type": "String",
+                    "info": "The second line of the address, if any.",
+                    "required": false
+                }, {
+                    "name": "addressLine3",
+                    "type": "String",
+                    "info": "The third line of the address, if any.",
+                    "required": false
+                }, {
+                    "name": "addressLocality",
+                    "type": "String",
+                    "info": "The city or town of the address.",
+                    "required": false
+                }, {
+                    "name": "addressSublocality",
+                    "type": "String",
+                    "info": "A civil region within the address's locality, if any.",
+                    "required": false
+                }, {
+                    "name": "addressSublocality2",
+                    "type": "String",
+                    "info": "A civil region within the address's sublocality, if any.",
+                    "required": false
+                }, {
+                    "name": "addressSublocality3",
+                    "type": "String",
+                    "info": "A civil region within the address's sublocality2, if any.",
+                    "required": false
+                }, {
+                    "name": "addressAdministrativeDistrictLevel1",
+                    "type": "String",
+                    "info": "A civil entity within the address's country. In the US, this is the state.",
+                    "required": false
+                }, {
+                    "name": "addressAdministrativeDistrictLevel2",
+                    "type": "String",
+                    "info": "A civil entity within the address's administrative_district_level_1. In the US, this is the county.",
+                    "required": false
+                }, {
+                    "name": "addressAdministrativeDistrictLevel3",
+                    "type": "String",
+                    "info": "A civil entity within the address's administrative_district_level_2, if any.",
+                    "required": false
+                }, {
+                    "name": "addressPostalCode",
+                    "type": "String",
+                    "info": "The address's postal code.",
+                    "required": false
+                }, {
+                    "name": "addressCountry",
+                    "type": "String",
+                    "info": "The address's country, in ISO 3166-1-alpha-2 format.",
+                    "required": false
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "Error"
+                }, {
+                    "name": "success",
+                    "info": "Success"
+                }]
+        }, {
+            "name": "getSingleCustomer",
+            "description": "This endpoint returns details for a single customer.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Valid AccessToken.",
+                    "required": true
+                }, {
+                    "name": "customerId",
+                    "type": "String",
+                    "info": "The ID of the customer to retrieve.",
+                    "required": true
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "Error"
+                }, {
+                    "name": "success",
+                    "info": "Success"
+                }]
+        }, {
+            "name": "createCustomerCard",
+            "description": "Adds a card on file to an existing customer.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Valid AccessToken.",
+                    "required": true
+                }, {
+                    "name": "customerId",
+                    "type": "String",
+                    "info": "The ID of the customer to link the card on file to.",
+                    "required": true
+                }, {
+                    "name": "cardNonce",
+                    "type": "String",
+                    "info": "A card nonce representing the credit card to link to the customer.",
+                    "required": true
+                }, {
+                    "name": "cardholderName",
+                    "type": "String",
+                    "info": "The cardholder's name.",
+                    "required": false
+                }, {
+                    "name": "billingAddressLine1",
+                    "type": "String",
+                    "info": "The first line of the buyer's billing address.",
+                    "required": false
+                }, {
+                    "name": "billingAddressLine2",
+                    "type": "String",
+                    "info": "The second line of the buyer's billing address.",
+                    "required": false
+                }, {
+                    "name": "billingAddressLine3",
+                    "type": "String",
+                    "info": "The third line of the buyer's billing address.",
+                    "required": false
+                }, {
+                    "name": "billingLocality",
+                    "type": "String",
+                    "info": "The city or town of the buyer's billing address.",
+                    "required": false
+                }, {
+                    "name": "billingSublocality",
+                    "type": "String",
+                    "info": "A civil region within the address's locality of the buyer's billing address.",
+                    "required": false
+                }, {
+                    "name": "billingSublocality2",
+                    "type": "String",
+                    "info": "A civil region within the address's sublocality of the buyer's billing address.",
+                    "required": false
+                }, {
+                    "name": "billingSublocality3",
+                    "type": "String",
+                    "info": "A civil region within the address's sublocality2 of the buyer's billing address.",
+                    "required": false
+                }, {
+                    "name": "billingAdministrativeDistrictLevel1",
+                    "type": "String",
+                    "info": "A civil entity within the address's country of the buyer's billing address. In the US, this is the state.",
+                    "required": false
+                }, {
+                    "name": "billingAdministrativeDistrictLevel2",
+                    "type": "String",
+                    "info": "A civil entity within the address's administrative_district_level_1 of the buyer's billing address.",
+                    "required": false
+                }, {
+                    "name": "billingAdministrativeDistrictLevel3",
+                    "type": "String",
+                    "info": "A civil entity within the address's administrative_district_level_2 of the buyer's billing address.",
+                    "required": false
+                }, {
+                    "name": "billingPostalCode",
+                    "type": "String",
+                    "info": "The billing address's postal code.",
+                    "required": false
+                }, {
+                    "name": "billingCountry",
+                    "type": "String",
+                    "info": "The billing address's country, in ISO 3166-1-alpha-2 format.",
+                    "required": false
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "Error"
+                }, {
+                    "name": "success",
+                    "info": "Success"
+                }]
+        }, {
+            "name": "deleteCustomerCard",
+            "description": "This endpoint removes a card on file from a customer.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Valid AccessToken.",
+                    "required": true
+                }, {
+                    "name": "customerId",
+                    "type": "String",
+                    "info": "The ID of the customer to delete.",
+                    "required": true
+                }, {
+                    "name": "cardId",
+                    "type": "String",
+                    "info": "The ID of the card on file to delete.",
+                    "required": true
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "Error"
+                }, {
+                    "name": "success",
+                    "info": "Success"
+                }]
+        }, {
+            "name": "deleteSingleCustomer",
+            "description": "This endpoint deletes a customer from a business, along with any linked cards on file.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Valid AccessToken.",
+                    "required": true
+                }, {
+                    "name": "customerId",
+                    "type": "String",
+                    "info": "The ID of the customer to delete.",
+                    "required": true
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "Error"
+                }, {
+                    "name": "success",
+                    "info": "Success"
+                }]
+        }]
 }
