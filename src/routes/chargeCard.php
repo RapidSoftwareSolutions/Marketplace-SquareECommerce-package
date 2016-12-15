@@ -25,7 +25,7 @@ $app->post('/api/SquareECommerce/chargeCard', function ($request, $response, $ar
         $body['customer_card_id'] = $post_data['args']['customerCardId'];
     }
     if(!empty($post_data['args']['delayCapture'])) {
-        $body['delay_capture'] = $post_data['args']['delayCapture'];
+        $body['delay_capture'] = (bool) $post_data['args']['delayCapture'];
     }
     if(!empty($post_data['args']['referenceId'])) {
         $body['reference_id'] = $post_data['args']['referenceId'];
