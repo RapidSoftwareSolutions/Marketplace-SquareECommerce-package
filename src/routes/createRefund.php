@@ -16,7 +16,7 @@ $app->post('/api/SquareECommerce/createRefund', function ($request, $response, $
     
     $body['idempotency_key'] = $post_data['args']['idempotencyKey'];
     $body['tender_id'] = $post_data['args']['tenderId'];
-    $body['amount_money']['amount'] = $post_data['args']['amount'];
+    $body['amount_money']['amount'] = (int) $post_data['args']['amount'];
     $body['amount_money']['currency'] = $post_data['args']['currency'];
     if(!empty($post_data['args']['reason'])) {
         $body['reason'] = $post_data['args']['reason'];
