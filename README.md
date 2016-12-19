@@ -11,12 +11,12 @@ The square API uses OAuth. To start using it, first create an app:
 1. Visit [https://connect.squareup.com/apps](https://connect.squareup.com/apps) and sign in.
 2. Register an application: 1. Click New Application; 2. Enter a name for your application and click Create App. (Note that your application name can't include the word Square.)
 3. After you complete the registration you will see Application ID and Application Secret. **For development, please only use the sandbox ID and Secret!**
-![](https://i.imgur.com/Gr55ARs.png)
 
+<image src="https://i.imgur.com/Gr55ARs.png" width="25%" height="25%"/>
 
 Than, you can use the Sandbox access token (found at the bottom of the page) in order to test the API from the RapidAPI console:
 
-![](https://i.imgur.com/IlOm7Fd.png)
+<image src="https://i.imgur.com/IlOm7Fd.png" width="25%" height="25%"/>
 
 ## SquareECommerce.getAccessToken
 This endpoint allows to obtain accessToken from SquareECommerce.
