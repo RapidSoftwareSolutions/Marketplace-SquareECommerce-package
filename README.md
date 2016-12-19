@@ -3,12 +3,20 @@ Accept, process and filter online payments through Square.
 * Domain: squareup.com
 * Credentials: clientId, clientSecret
 
-## How to get credentials: 
-0. [Create account](https://squareup.com/signup?v=developers) to start using the API. 
-1. Visit https://connect.squareup.com/apps and sign in.
+## Using the API:
+The square API uses OAuth. To start using it, first create an app:
+
+
+0. Head over to [squareup.com](https://squareup.com/signup?v=developers) and create an account to start using the API. 
+1. Visit [https://connect.squareup.com/apps](https://connect.squareup.com/apps) and sign in.
 2. Register an application: 1. Click New Application; 2. Enter a name for your application and click Create App. (Note that your application name can't include the word Square.)
-3. After complete registration you will see Application ID and Application Secret.
-4. How to generate authorization code you can find in [documentation](https://docs.connect.squareup.com/api/oauth/#implementingoauth) 
+3. After you complete the registration you will see Application ID and Application Secret. **For development, please only use the sandbox ID and Secret!**
+![](https://i.imgur.com/Gr55ARs.png)
+
+
+Than, you can use the Sandbox access token (found at the bottom of the page) in order to test the API from the RapidAPI console:
+
+![](https://i.imgur.com/IlOm7Fd.png)
 
 ## SquareECommerce.getAccessToken
 This endpoint allows to obtain accessToken from SquareECommerce.
