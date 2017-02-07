@@ -1,3 +1,5 @@
+[![](https://scdn.rapidapi.com/RapidAPI_banner.png)](https://rapidapi.com/package/SquareECommerce/functions?utm_source=RapidAPIGitHub_SquareEcommFunctions&utm_medium=button&utm_content=RapidAPI_GitHub)
+
 # SquareECommerce Package
 Accept, process and filter online payments through Square.
 * Domain: squareup.com
