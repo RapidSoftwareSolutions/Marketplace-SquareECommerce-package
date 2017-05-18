@@ -11,7 +11,7 @@ The square API uses OAuth. To start using it, first create an app:
 
 0. Head over to [squareup.com](https://squareup.com/signup?v=developers) and create an account to start using the API. 
 1. Visit [https://connect.squareup.com/apps](https://connect.squareup.com/apps) and sign in.
-2. Register an application: 1. Click New Application; 2. Enter a name for your application and click Create App. (Note that your application name can't include the word Square.)
+2. Register an application: - Click "New Application" - Enter a name for your application and click Create App. (Note that your application name can't include the word Square.)
 3. After you complete the registration you will see Application ID and Application Secret. **For development, please only use the sandbox ID and Secret!**
 
 ![](https://imgur.com/download/Gr55ARs)
