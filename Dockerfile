@@ -7,7 +7,7 @@ ENV LANG="en_US.UTF-8" \
 
 COPY /conf/run.sh /usr/local/bin/run.sh
 
-# Bundle app source 
+# Bundle app source
 COPY . .
 
 RUN echo "http://dl-4.alpinelinux.org/alpine/v3.5/main/" >> /etc/apk/repositories && \
