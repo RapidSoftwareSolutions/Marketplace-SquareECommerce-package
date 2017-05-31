@@ -345,7 +345,8 @@
                     "required": false
                 }, {
                     "name": "sortOrder",
-                    "type": "String",
+                    "type": "Select",
+                    "options":["ASC","DESC"],
                     "info": "The order in which results are listed in the response (ASC for oldest first, DESC for newest first). Default value: DESC",
                     "required": false
                 }, {
@@ -515,7 +516,8 @@
                     "required": false
                 }, {
                     "name": "sortOrder",
-                    "type": "String",
+                    "type": "Select",
+                    "options":["ASC","DESC"],
                     "info": "The order in which results are listed in the response (ASC for oldest first, DESC for newest first). Default value: DESC",
                     "required": false
                 }, {

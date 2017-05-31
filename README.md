@@ -20,6 +20,15 @@ Than, you can use the Sandbox access token (found at the bottom of the page) in 
 
 ![](https://imgur.com/download/IlOm7Fd)
 
+## Custom datatypes:
+ |Datatype|Description|Example
+ |--------|-----------|----------
+ |Datepicker|String which includes date and time|```2016-05-28 00:00:00```
+ |Map|String which includes latitude and longitude coma separated|```50.37, 26.56```
+ |List|Simple array|```["123", "sample"]```
+ |Select|String with predefined values|```sample```
+ |Array|Array of objects|```[{"Second name":"123","Age":"12","Photo":"sdf","Draft":"sdfsdf"},{"name":"adi","Second name":"bla","Age":"4","Photo":"asfserwe","Draft":"sdfsdf"}] ```
+
 ## SquareECommerce.getAccessToken
 This endpoint allows to obtain accessToken from SquareECommerce.
 
@@ -120,7 +129,7 @@ This endpoint returns lists transactions for a particular location.
 | locationId | String| Required: The ID of the location to list transactions for.
 | beginTime  | String| Optional: The beginning of the requested reporting period, in RFC 3339 format (2016-01-31T00:00:00Z). Default value: The current time minus one year.
 | endTime    | String| Optional: The end of the requested reporting period, in RFC 3339 format (2016-01-31T00:00:00Z). Default value: The current time.
-| sortOrder  | String| Optional: The order in which results are listed in the response (ASC for oldest first, DESC for newest first). Default value: DESC
+| sortOrder  | Select| Optional: The order in which results are listed in the response (ASC for oldest first, DESC for newest first). Default value: DESC
 | cursor     | String| Optional: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for your original query.
 
 
@@ -178,7 +187,7 @@ This endpoint returns lists refunds for one of a business's locations.
 | locationId | String| Required: The ID of the location to list refunds for.
 | beginTime  | String| Optional: The beginning of the requested reporting period, in RFC 3339 format (2016-01-31T00:00:00Z). Default value: The current time minus one year.
 | endTime    | String| Optional: The end of the requested reporting period, in RFC 3339 format (2016-01-31T00:00:00Z). Default value: The current time.
-| sortOrder  | String| Optional: The order in which results are listed in the response (ASC for oldest first, DESC for newest first). Default value: DESC
+| sortOrder  | Select| Optional: The order in which results are listed in the response (ASC for oldest first, DESC for newest first). Default value: DESC
 | cursor     | String| Optional: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for your original query.
 
 
