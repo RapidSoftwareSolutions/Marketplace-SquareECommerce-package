@@ -2,14 +2,14 @@
 
 # SquareECommerce Package
 Accept, process and filter online payments through Square.
-* Domain: squareup.com
+* Domain: [squareup.com](https://squareup.com/)
 * Credentials: clientId, clientSecret
 
 ## Using the API:
 The square API uses OAuth. To start using it, first create an app:
 
 
-0. Head over to [squareup.com](https://squareup.com/signup?v=developers) and create an account to start using the API. 
+0. Head over to [squareup.com](https://squareup.com/signup?v=developers) and create an account to start using the API.
 1. Visit [https://connect.squareup.com/apps](https://connect.squareup.com/apps) and sign in.
 2. Register an application: - Click "New Application" - Enter a name for your application and click Create App. (Note that your application name can't include the word Square.)
 3. After you complete the registration you will see Application ID and Application Secret. **For development, please only use the sandbox ID and Secret!**
@@ -306,4 +306,3 @@ This endpoint deletes a customer from a business, along with any linked cards on
 |------------|-------|----------
 | accessToken| String| Required: Valid AccessToken.
 | customerId | String| Required: The ID of the customer to delete.
-

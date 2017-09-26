@@ -175,7 +175,8 @@
                     "required": false
                 }, {
                     "name": "delayCapture",
-                    "type": "String",
+                    "type": "Select",
+                    "options":["true","false"],
                     "info": "If true, the request will only perform an Auth on the provided card. Default value: false",
                     "required": false
                 }, {
@@ -341,12 +342,12 @@
                     "required": true
                 }, {
                     "name": "beginTime",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "The beginning of the requested reporting period, in RFC 3339 format (2016-01-31T00:00:00Z). Default value: The current time minus one year.",
                     "required": false
                 }, {
                     "name": "endTime",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "The end of the requested reporting period, in RFC 3339 format (2016-01-31T00:00:00Z). Default value: The current time.",
                     "required": false
                 }, {
@@ -512,12 +513,12 @@
                     "required": true
                 }, {
                     "name": "beginTime",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "The beginning of the requested reporting period, in RFC 3339 format (2016-01-31T00:00:00Z). Default value: The current time minus one year.",
                     "required": false
                 }, {
                     "name": "endTime",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "The end of the requested reporting period, in RFC 3339 format (2016-01-31T00:00:00Z). Default value: The current time.",
                     "required": false
                 }, {
