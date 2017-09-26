@@ -1,7 +1,7 @@
 <?php
 
 $app->post('/api/SquareECommerce/getTransactions', function ($request, $response, $args) {
-    
+
     $checkRequest = $this->validation;
     $validateRes = $checkRequest->validate($request, ['accessToken','locationId']);
     if(!empty($validateRes) && isset($validateRes['callback']) && $validateRes['callback']=='error') {
@@ -11,15 +11,16 @@ $app->post('/api/SquareECommerce/getTransactions', function ($request, $response
     }
 
     $query_str = 'https://connect.squareup.com/v2/locations/'.$post_data['args']['locationId'].'/transactions';
-    
+
     $headers['Authorization'] = 'Bearer '.$post_data['args']['accessToken'];
-    
+
     $query = [];
     if(!empty($post_data['args']['beginTime'])) {
-        $query['begin_time'] = $post_data['args']['beginTime'];
+
+        $query['begin_time'] = date("Y-m-d\TH:i:s\Z", strtotime($post_data['args']['beginTime']));
     }
     if(!empty($post_data['args']['endTime'])) {
-        $query['end_time'] = $post_data['args']['endTime'];
+        $query['end_time'] =  date("Y-m-d\TH:i:s\Z", strtotime($post_data['args']['endTime']));
     }
     if(!empty($post_data['args']['sortOrder'])) {
         $query['sort_order'] = $post_data['args']['sortOrder'];
@@ -27,9 +28,9 @@ $app->post('/api/SquareECommerce/getTransactions', function ($request, $response
     if(!empty($post_data['args']['cursor'])) {
         $query['cursor'] = $post_data['args']['cursor'];
     }
-    
+
     $client = $this->httpClient;
-    
+
     try {
 
         $resp = $client->get( $query_str, [
@@ -37,7 +38,7 @@ $app->post('/api/SquareECommerce/getTransactions', function ($request, $response
             'query' => $query
         ]);
         $responseBody = $resp->getBody()->getContents();
-  
+
         if(in_array($resp->getStatusCode(), ['200', '201', '202', '203', '204'])) {
             $result['callback'] = 'success';
             if(empty(json_decode($responseBody, true))) {
@@ -83,7 +84,7 @@ $app->post('/api/SquareECommerce/getTransactions', function ($request, $response
         $result['contextWrites']['to']['status_msg'] = 'Something went wrong inside the package.';
 
     }
-    
+
     return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($result);
-    
+
 });
